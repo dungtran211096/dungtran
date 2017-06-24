@@ -1,0 +1,51 @@
+<form ng-submit="beforeSubmit()">
+    <div class="section-title">
+        <h3>
+            <span class="fa fa-cogs"></span>
+            {{title}}
+        </h3>
+
+        <ul id="action">
+            <li>
+                <button class="submit" type="submit"><span class="fa fa-save"></span> Lưu</button>
+            </li>
+            <li>
+                <button class="reset" ng-click="reset()" type="button"><span class="fa fa-repeat"></span> Reset</button>
+            </li>
+            <li>
+                <button class="cancel" ui-sref="articles.cat.list" type="button"><span
+                        class="fa fa-times-circle"></span>
+                    Hủy
+                </button>
+            </li>
+        </ul>
+    </div>
+
+    <div class="form-content">
+        <div class="form-input">
+            <div class="col-md-6">
+                <input class="d-input" type="text" ng-model="newInfoValue">
+            </div>
+            <div class="col-md-3">
+                <select class="d-input" ng-options="key as value for (key,value) in infoType" ng-model="newInfoType">
+                    <option value="">Chọn Loại Thông Tin</option>
+                </select>
+            </div>
+            <div class="col-md-2" style="margin: auto 0;">
+                <button class="d-btn d-success" type="button" ng-click="add(newInfoValue,newInfoType)">Thêm</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6" ng-repeat="(typeKey, typeName) in infoType">
+                <legend>{{typeName | uppercase}} TỐT</legend>
+                <div class="form-input" ng-repeat="(key,value) in data[typeKey]">
+                    <div class="col-md-9">
+                        <input class="d-input" type="text" ng-model="data[typeKey][key]">
+                    </div>
+                    <div class="col-md-2" style="margin: auto 0;">
+                        <i class="fa fa-close fa-2x pointer" ng-click="remove(key, typeKey)"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+</form>
